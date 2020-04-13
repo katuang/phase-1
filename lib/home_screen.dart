@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:suitmedia/eventpage.dart';
-import 'package:suitmedia/guestpage.dart';
+import 'package:suitmedia/event_screen.dart';
+import 'package:suitmedia/guest_screen.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _headerTitle(String title) {
     return Container(
+      margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -98,16 +99,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   String device(int value) {
-    if (value % 2 == 0) {
+    if (value%2 == 0) {
       return 'Blackberry';
-    } else if (value % 3 == 0){
+    } else if (value%3 == 0){
       return 'Android';
-    } else if (value % 2 == 0 && value % 3 == 0) {
+    } else if (value%6 == 0) {
       return 'iOS';
     } else {
       return '';
     }
   }
+
   @override 
   Widget build(BuildContext context) {
     return Scaffold(

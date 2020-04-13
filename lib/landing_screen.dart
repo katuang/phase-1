@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart';
+import 'home_screen.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
@@ -14,6 +14,7 @@ class _LandingPageState extends State<LandingPage> {
   // String _inputText;
   // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final myController = TextEditingController();
+  bool _validate = false;
 
   fetchGuest() async {
   final response = await http.get('https://reqres.in/api/users');
@@ -42,6 +43,8 @@ class _LandingPageState extends State<LandingPage> {
         decoration: InputDecoration(
           hintText: 'Type Name Here',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
+          errorText: _validate ? 'Name Can\'t Be Empty' : null,
+          // galabelText: 'Name'
         ),
         // validator: (value) => value.isEmpty ? 'Name can\'t be empty' : null,
         // onSaved: (value) => _inputText = value.trim(),
@@ -56,9 +59,11 @@ class _LandingPageState extends State<LandingPage> {
   Widget nextButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(title: myController.text)));
-        // print(_inputText);
-        // print(fetchGuest());
+        
+        setState(() {
+          myController.text.isEmpty ? _validate = true : _validate = false;
+          !_validate ? Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(title: myController.text))) : _validate = true;
+        });
         
       },
       child: Container(
