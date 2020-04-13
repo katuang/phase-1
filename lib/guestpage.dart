@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:suitmedia/model.dart';
+import 'package:suitmedia/model/guest_model.dart';
+import 'package:suitmedia/service/guest_service.dart';
 
 class GuestPage extends StatefulWidget {
 
@@ -14,7 +15,7 @@ class _GuestPageState extends State<GuestPage> {
   @override
   void initState() {
     super.initState();
-    futurePage = fetchPage();
+    futurePage = GuestService().fetchPage();
   }
 
   Widget _buildBody(List<Guest> guests) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:suitmedia/model.dart';
+import 'package:suitmedia/model/event_model.dart';
+import 'package:suitmedia/service/event_service.dart';
 
 class EventPage extends StatefulWidget {
 
@@ -14,7 +15,7 @@ class _EventPageState extends State<EventPage> {
   @override
   void initState() {
     super.initState();
-    futureEvent = fetchEvents();
+    futureEvent = EventService().fetchEvents();
   }
 
   Widget _buildBody(List<Event> events) {
