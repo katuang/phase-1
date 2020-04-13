@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   String chooseEvent = 'Choose Event';
   String chooseGuest = 'Choose Guest';
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Widget _headerTitle(String title) {
     return Container(
@@ -51,6 +52,7 @@ class _HomePageState extends State<HomePage> {
     return InkWell(
       onTap: () {
         guestSelection(context);
+        
       },
       child: Container(
         alignment: Alignment.center,
@@ -71,14 +73,46 @@ class _HomePageState extends State<HomePage> {
   }
 
   guestSelection(BuildContext context) async{
-    chooseGuest = await Navigator.of(context).push(MaterialPageRoute(builder: (context) => GuestPage()));
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text(chooseGuest)));
+    Detail chooseGuestObject = await Navigator.of(context).push(MaterialPageRoute(builder: (context) => GuestPage()));
+    chooseGuest = chooseGuestObject.firstName + ' ' + chooseGuestObject.lastName;
+    
+    // Scaffold.of(context).showSnackBar(SnackBar(content: Text(chooseGuest)));
+    // Scaffold.of(context)
+    //         ..removeCurrentSnackBar()
+    //         ..showSnackBar(SnackBar(content: Text('$chooseGuest')));
+    String chooseGuestId = device(chooseGuestObject.id);
+    final snackBar = SnackBar(content: contentDialog(chooseGuestId));
+    _scaffoldKey.currentState.showSnackBar(snackBar);
+  }
+
+  Widget contentDialog(String value) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Icon(Icons.phone_iphone),
+          Text(value),
+        ],
+      ),
+    );
+  }
+
+  String device(int value) {
+    if (value % 2 == 0) {
+      return 'Blackberry';
+    } else if (value % 3 == 0){
+      return 'Android';
+    } else if (value % 2 == 0 && value % 3 == 0) {
+      return 'iOS';
+    } else {
+      return '';
+    }
   }
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
+      key: _scaffoldKey,
+      body: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
           // decoration: BoxDecoration(
@@ -94,7 +128,6 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      ),
     );
   }
 }

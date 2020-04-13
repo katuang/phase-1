@@ -49,6 +49,7 @@ flutter:
     - images/fourthImage.jpg
     - images/fifthImage.jpg
     - images/sixthImage.jpg
+    - assets/events.json
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

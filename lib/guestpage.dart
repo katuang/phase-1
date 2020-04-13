@@ -24,7 +24,7 @@ class _GuestPageState extends State<GuestPage> {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            Navigator.of(context).pop(guests[index].firstName + ' ' + guests[index].lastName);
+            Navigator.of(context).pop(Detail(id: guests[index].id, firstName: guests[index].firstName, lastName: guests[index].lastName));
           },
           child: Container(
             margin: EdgeInsets.all(5),
@@ -105,4 +105,12 @@ class _GuestPageState extends State<GuestPage> {
       ),
     );
   }
+}
+
+class Detail {
+  final int id;
+  final String firstName;
+  final String lastName;
+
+  Detail({this.id, this.firstName, this.lastName});
 }

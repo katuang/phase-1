@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suitmedia/model.dart';
 
 class EventPage extends StatefulWidget {
 
@@ -8,52 +9,21 @@ class EventPage extends StatefulWidget {
 
 class _EventPageState extends State<EventPage> {
 
-  var eventData = [
-    {
-      'id': 1,
-      'name': 'Event 1',
-      'date': 'April 4, 2020',
-      'image': 'images/firstImage.jpg',
-    },
-    {
-      'id': 2,
-      'name': 'Event 2',
-      'date': 'April 5, 2020',
-      'image': 'images/secondImage.jpg',
-    },
-    {
-      'id': 3,
-      'name': 'Event 3',
-      'date': 'April 6, 2020',
-      'image': 'images/thirdImage.jpg',
-    },
-    {
-      'id': 4,
-      'name': 'Event 4',
-      'date': 'April 7, 2020',
-      'image': 'images/fourthImage.jpg',
-    },
-    {
-      'id': 5,
-      'name': 'Event 5',
-      'date': 'April 8, 2020',
-      'image': 'images/fifthImage.jpg',
-    },
-    {
-      'id': 6,
-      'name': 'Event 6',
-      'date': 'April 9, 2020',
-      'image': 'images/sixthImage.jpg',
-    },
+  Future<List<Event>> futureEvent;
 
-  ];
-  Widget _buildBody() {
+  @override
+  void initState() {
+    super.initState();
+    futureEvent = fetchEvents();
+  }
+
+  Widget _buildBody(List<Event> events) {
     return ListView.builder(
-      itemCount: 6,
-      itemBuilder: (context, i) {
+      itemCount: events.length,
+      itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            Navigator.of(context).pop(eventData[i]['name']);
+            Navigator.of(context).pop(events[index].name);
           },
           child: Container(
             decoration: BoxDecoration(
@@ -66,8 +36,8 @@ class _EventPageState extends State<EventPage> {
             ),
             child: Row(
               children: <Widget>[
-                imageContainer(eventData[i]['image']),
-                titleContainer(eventData[i]['name'], eventData[i]['date']),
+                imageContainer(events[index].image),
+                titleContainer(events[index].name, events[index].date),
               ],
             ),
           ),
@@ -118,7 +88,15 @@ class _EventPageState extends State<EventPage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      body: _buildBody(),
+      body: Center(
+        child: FutureBuilder(
+          future: futureEvent,
+          builder: (context, snapshot) {
+            if(snapshot.hasError) print(snapshot.error);
+            return snapshot.hasData ? _buildBody(snapshot.data) : Center(child: CircularProgressIndicator());
+          },
+        ),
+      ),
     );
   }
 }
