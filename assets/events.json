@@ -2,42 +2,42 @@
     {
         "id": 1,
         "name": "Event 1",
-        "date": "April 4, 2020",
+        "date": "2020-03-10",
         "image": "images/firstImage.jpg"
     },
 
     {
         "id": 2,
         "name": "Event 2",
-        "date": "April 5, 2020",
+        "date": "2020-03-11",
         "image": "images/secondImage.jpg"
     },
 
     {
         "id": 3,
         "name": "Event 3",
-        "date": "April 6, 2020",
+        "date": "2020-03-12",
         "image": "images/thirdImage.jpg"
     },
     
     {
         "id": 4,
         "name": "Event 4",
-        "date": "April 7, 2020",
+        "date": "2020-03-13",
         "image": "images/fourthImage.jpg"
     },
 
     {
         "id": 5,
         "name": "Event 5",
-        "date": "April 8, 2020",
+        "date": "2020-03-14",
         "image": "images/fifthImage.jpg"
     },
 
     {
         "id": 6,
         "name": "Event 6",
-        "date": "April 9, 2020",
+        "date": "2020-03-15",
         "image": "images/sixthImage.jpg"
     }
     

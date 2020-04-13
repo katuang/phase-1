@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:suitmedia/model/event_model.dart';
 import 'package:suitmedia/service/event_service.dart';
+import 'package:jiffy/jiffy.dart';
 
 class EventPage extends StatefulWidget {
 
@@ -38,7 +39,7 @@ class _EventPageState extends State<EventPage> {
             child: Row(
               children: <Widget>[
                 imageContainer(events[index].image),
-                titleContainer(events[index].name, events[index].date),
+                titleContainer(events[index].name, Jiffy(events[index].date).yMMMMd),
               ],
             ),
           ),
@@ -66,7 +67,7 @@ class _EventPageState extends State<EventPage> {
     );
   }
 
-  Widget titleContainer(String header, body) {
+  Widget titleContainer(String header, String body) {
     return Expanded(
       child: Container(
       child: Column(
